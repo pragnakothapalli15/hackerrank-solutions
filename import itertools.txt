@@ -1,0 +1,26 @@
+import itertools
+
+def main():
+    try:
+        K, M = map(int, input().strip().split())
+        lists = []
+        for _ in range(K):
+            line = list(map(int, input().strip().split()))
+            lst = line[1:]
+            lists.append(lst)
+        max_S = calculate_max_S(K, M, lists)
+        print(max_S)
+    except Exception as e:
+        # In a real application, you'd log this error
+        pass
+
+def calculate_max_S(K, M, lists):
+    max_S = 0
+    combinations = itertools.product(*lists)
+    for combination in combinations:
+        S = sum([x**2 for x in combination]) % M
+        max_S = max(max_S, S)
+    return max_S
+
+if __name__ == "__main__":
+    main(
